@@ -11,9 +11,29 @@ export default function TextForm(props) {
     setText(newText);
   };
 
+  const handleClearClick = () => {
+    let newText = "";
+    setText(newText);
+  };
+
   const handleOnChange = (event) => {
     // console.log("On change");
     setText(event.target.value);
+  };
+
+  const copyToClipBoard = () => {
+    // Get the text field
+    var copyText = document.getElementById("myBox");
+
+    // Select the text field
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); // For mobile devices
+
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(copyText.value);
+
+    // Alert the copied text
+    // alert("Copied the text: " + copyText.value);
   };
 
   const [text, setText] = useState("Enter text here");
@@ -21,7 +41,10 @@ export default function TextForm(props) {
   // setText("new text"); // Correct way to change the state
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{ color: props.mode === "dark" ? "white" : "black" }} //first curly brace is for js and second one is for object
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
@@ -41,18 +64,39 @@ export default function TextForm(props) {
             type="button"
             onClick={handleLowClick}
           >
-            Convert to Uppercase
+            Convert to Lowercase
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onClick={copyToClipBoard}
+          >
+            Copy to clipboard
+          </button>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onClick={handleClearClick}
+          >
+            Clear Text
           </button>
         </div>
       </div>
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
         <h1>Your Text Summary</h1>
         <p>
           {text.split(" ").length} words and {text.length} characters
         </p>
         <p>{0.008 * text.split(" ").length} Minutes to read</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>
+          {text.length > 0
+            ? text
+            : "Enter Something In The TextBox Above To Preview it Here"}
+        </p>
       </div>
     </>
   );
