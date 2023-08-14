@@ -4,16 +4,19 @@ export default function TextForm(props) {
   const handleUpClick = () => {
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to uppercase!", "success");
   };
 
   const handleLowClick = () => {
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to lowercase!", "success");
   };
 
   const handleClearClick = () => {
     let newText = "";
     setText(newText);
+    props.showAlert("Texted Clear", "danger");
   };
 
   const handleOnChange = (event) => {
@@ -34,6 +37,7 @@ export default function TextForm(props) {
 
     // Alert the copied text
     // alert("Copied the text: " + copyText.value);
+    props.showAlert("Text Copied !", "success");
   };
 
   const [text, setText] = useState("Enter text here");
@@ -52,26 +56,26 @@ export default function TextForm(props) {
             value={text}
             onChange={handleOnChange}
             id="myBox"
-            rows="8"
+            rows="4"
           ></textarea>
         </div>
         <div class="d-grid gap-2">
           <button class="btn btn-primary" type="button" onClick={handleUpClick}>
-            Convert to Uppercase
+            Convert To Uppercase
           </button>
           <button
             class="btn btn-primary"
             type="button"
             onClick={handleLowClick}
           >
-            Convert to Lowercase
+            Convert To Lowercase
           </button>
           <button
             class="btn btn-primary"
             type="button"
             onClick={copyToClipBoard}
           >
-            Copy to clipboard
+            Copy To Clipboard
           </button>
           <button
             class="btn btn-primary"
