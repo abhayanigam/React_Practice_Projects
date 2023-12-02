@@ -45,7 +45,7 @@ function MyForm() {
         <input
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)} // e is a synthetic event
         />
       </label>
       <input type="submit" />
